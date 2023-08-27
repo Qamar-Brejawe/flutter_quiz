@@ -28,7 +28,7 @@ Future<void> main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  Get.put(NotificationService());
+  //Get.put(NotificationService());
 
   runApp(const MyApp());
 }

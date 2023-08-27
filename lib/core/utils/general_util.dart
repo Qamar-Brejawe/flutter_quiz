@@ -15,7 +15,7 @@ SharedPreferencesRepositories get storage =>
 
 LocationService get locationService => Get.find<LocationService>();
 
-NotificationService get notificationService => Get.find<NotificationService>();
+//NotificationService get notificationService => Get.find<NotificationService>();
 
 // void fadeInTransition(Widget view) {
 //   Get.to(view, transition: Transition.fadeIn);

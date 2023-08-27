@@ -9,7 +9,7 @@ import 'package:http_parser/http_parser.dart';
 import '../enums/request_type.dart';
 
 class NetworkUtil {
-  static String baseUrl = 'training.owner-tech.com';
+  static String baseUrl = 'darrebniproject.000webhostapp.com';
   static var client = http.Client();
 
   static Future<dynamic> sendRequest({
@@ -67,17 +67,16 @@ class NetworkUtil {
   static Future<dynamic> sendMultipartRequest({
     required String url,
     required RequestType type,
+    Map<String, dynamic>? params,
     Map<String, String>? headers = const {},
     Map<String, String>? fields = const {},
     Map<String, String>? files = const {},
-    Map<String, dynamic>? params,
   }) async {
     try {
       var request =
           http.MultipartRequest(type.name, Uri.https(baseUrl, url, params));
 
       var _filesKeyList = files!.keys.toList();
-
       var _filesNameList = files.values.toList();
 
       for (int i = 0; i < _filesKeyList.length; i++) {
@@ -92,6 +91,7 @@ class NetworkUtil {
           request.files.add(await multipartFile);
         }
       }
+
       request.headers.addAll(headers!);
       request.fields.addAll(fields!);
 

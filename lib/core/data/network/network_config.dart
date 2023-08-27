@@ -2,7 +2,7 @@ import '../../enums/request_type.dart';
 import '../../utils/general_util.dart';
 
 class NetworkConfig {
-  static String BASE_API = 'api/web/';
+  static String BASE_API = '/api/Darrebni/';
 
   static String getFullApiUrl(String api) {
     return BASE_API + api;
@@ -14,7 +14,7 @@ class NetworkConfig {
       Map<String, String>? extraHeaders = const {}}) {
     return {
       if (needAuth!)
-        'Authorization': 'Bearer ${storage.getTokenInfo()?.accessToken ?? ''}',
+        'Authorization': 'Bearer ${storage.getTokenInfo()?.token ?? ''}',
       if (type != RequestType.GET) 'Content-Type': 'application/json',
       ...extraHeaders!
     };

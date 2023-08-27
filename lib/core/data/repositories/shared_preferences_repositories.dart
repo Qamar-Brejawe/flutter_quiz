@@ -163,4 +163,6 @@ class SharedPreferencesRepositories {
   dynamic getPreference({required String key}) {
     return globalSharedPref.get(key);
   }
+
+  void setLoggedIN(bool bool) {}
 }

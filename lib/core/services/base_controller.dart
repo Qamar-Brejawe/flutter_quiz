@@ -3,44 +3,41 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:get/get.dart';
 
 import '../../ui/shared/utils.dart';
+import '../data/repositories/user_repository.dart';
 import '../enums/Operation_type.dart';
 import '../enums/request_status.dart';
-import '../utils/general_util.dart';
 
 class BaseController extends GetxController {
-  // UserRepository userRepository = Get.put(UserRepository());
+  UserRepository userRepository = Get.put(UserRepository());
 
   Rx<RequestStatus> requestStatus = RequestStatus.DEFAULT.obs;
-  Rx<OperationType> operationType = OperationType.NONE.obs;
-
-  RxList<OperationType> listType = <OperationType>[].obs;
+  RxList<OperationType> operationType = <OperationType>[].obs;
 
   Future runFutureFunction({required Future function}) async {
-    checkConnection(() async {
-      await function;
-    });
+    // checkConnection(() async {
+    await function;
+    // });
   }
 
   Future runLoadingFutureFunction(
       {required Future function,
       OperationType? type = OperationType.NONE}) async {
-    checkConnection(() async {
-      requestStatus.value = RequestStatus.LOADING;
-      operationType.value = type!;
-      listType.add(type);
-      await function;
-      requestStatus.value = RequestStatus.DEFAULT;
-      operationType.value = OperationType.NONE;
-    });
+    //checkConnection(() async {
+    requestStatus.value = RequestStatus.LOADING;
+    operationType.add(type!);
+    await function;
+    requestStatus.value = RequestStatus.DEFAULT;
+    operationType.remove(type);
+    // });
   }
 
-  Future runFullLoadingFutureFunction({
+  Future runFullLoadingFunction({
     required Future function,
   }) async {
-    checkConnection(() async {
-      customLoader();
-      await function;
-      BotToast.closeAllLoading();
-    });
+    //checkConnection(() async {
+    customLoader();
+    await function;
+    BotToast.closeAllLoading();
+    // });
   }
 }
